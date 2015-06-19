@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  connection: local
+  sudo: no
+
+  vars_prompt:
+    - name: project_name 
+      prompt: "Project name"
+      private: no
+    - name: project_dir
+      prompt: "Project directory"
+      private: no
+      default: "../{{ project_name }}"
+    - name: role_author
+      prompt: "Role author"
+      private: no
+    - name: feature_group_ids
+      prompt: "Feature groups (comma separated)"
+      private: no
+    - name: feature_group_desc
+      prompt: "Feature groups description"
+      private: no
+    - name: update_site_url
+      prompt: "Update site url"
+      private: no
+
+  tasks:
+    - file: path={{ item }} state=directory
+      with_items:
+        - "{{ project_dir }}"
+        - "{{ project_dir }}/meta"
+        - "{{ project_dir }}/tasks"
+    - template: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+        - { src: templates/README.j2, dest: "{{ project_dir }}/README.md" }
+        - { src: templates/gitignore.j2, dest: "{{ project_dir }}/.gitignore" }
+        - { src: templates/meta.j2, dest: "{{ project_dir }}/meta/main.yml" }
+        - { src: templates/tasks.j2, dest: "{{ project_dir }}/tasks/main.yml" }
+        - { src: templates/test.j2, dest: "{{ project_dir }}/test.yml" }
+        - { src: templates/test-requirements.j2, dest: "{{ project_dir }}/test-requirements.yml" }

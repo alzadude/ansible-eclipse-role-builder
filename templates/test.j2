@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  sudo: yes
+
+  roles:
+    - eclipse
+
+  tasks:
+    - include: tasks/main.yml
