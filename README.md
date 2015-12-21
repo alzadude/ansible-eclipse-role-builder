@@ -1,1 +1,1 @@
-# fedora-ansible-eclipse-role-builder
+# ansible-eclipse-role-builder
