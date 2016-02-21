@@ -37,4 +37,3 @@
         - { src: templates/meta.j2, dest: "{{ project_dir }}/meta/main.yml" }
         - { src: templates/tasks.j2, dest: "{{ project_dir }}/tasks/main.yml" }
         - { src: templates/test.j2, dest: "{{ project_dir }}/test.yml" }
-        - { src: templates/test-requirements.j2, dest: "{{ project_dir }}/test-requirements.yml" }
